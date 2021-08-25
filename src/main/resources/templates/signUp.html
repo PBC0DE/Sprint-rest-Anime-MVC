@@ -1,0 +1,93 @@
+<!doctype html>
+
+<html lang="en"
+      class="h-100"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/layout :: head"></head>
+
+<body class="d-flex h-100 text-center bg-dark">
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+    <header th:fragment="header" class="mb-auto">
+        <div>
+            <nav class="nav nav-masthead navbar-expand-md justify-content-between">
+                <h3 class="float-md-start mb-0 text-white" ><a class="nav-link active" th:href="@{/}">AnimeX</a></h3>
+                <div class="nav nav-masthead navbar-expand-md justify-content-center">
+                    <a sec:authorize="isAnonymous()" th:text="#{signup.page}" class="nav-link active" aria-current="page" href="#">SignUP</a>
+                    <a th:text="#{anime.page}" class="nav-link" th:href="@{'/'}">Anime</a>
+                    <a th:text="#{about.page}" class="nav-link" href="#">About</a>
+                    <a sec:authorize="!isAnonymous()" th:text="#{logout}" class="nav-link" th:href="@{/logout}">Logout</a>
+                </div>
+                <form class="float-md-end mb-1 d-flex flex-row">
+                    <input th:placeholder="#{input.search}" class="form-control" type="text" placeholder="Search" aria-label="Search">
+                    <li class="p-2 dropdown" style="margin-left:15px">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
+                           aria-expanded="false"
+                           th:text="${#locale.toLanguageTag().toUpperCase()}">
+                        </a>
+                        <ul class="dropdown-menu justify-content-center" aria-labelledby="dropdown01">
+                            <li><a class="p-2 nav-link dropdown-item" th:href="@{''(lang='lt')}"
+                                   th:unless="${#locale.toString().equals('lt')}">LT</a></li>
+                            <li><a class="p-2 nav-link dropdown-item" th:href="@{''(lang='en')}"
+                                   th:unless="${#locale.toString().equals('en')}">EN</a></li>
+                        </ul>
+                    </li>
+                </form>
+            </nav>
+        </div>
+    </header>
+
+    <h3 th:text="#{joinus}" class="justify-content-center text-white ett">JOIN US!</h3>
+    <main>
+        <div class="wrap">
+                <section class="templateDesign">
+                    <div class="signup-form">
+                    <form method="POST" th:action="@{/login}" th:object="${userLogin}">
+                        <div class="action">
+                            <span th:text="#{login.title}"
+                                  th:class="${#fields.hasAnyErrors()} ? 'load' : 'load show'"
+                                  th:if="${!#fields.hasAnyErrors()}"
+                                  id="login-action" onclick="openLoginPage()">Login</span>
+                            <span th:class="${#fields.hasAnyErrors()} ? 'load show' : 'load'"
+                                  th:text="#{register.title}"
+                                  onclick="openRegPage()" id="reg-action">Register</span>
+                        </div>
+                        <div th:if="${registerSuccess} != null">
+                            <div th:text="#{register.success}" class="alert alert-success" role="alert">
+                                Successfully signed up
+                            </div>
+                        </div>
+                        <div th:class="${#fields.hasAnyErrors()}  ? 'login' : 'login show-page'">
+                            <input class="signup-input" th:placeholder="#{signup.username}" th:field="*{username}" name="username" type="text" placeholder="Username"/>
+                            <input class="signup-input" th:placeholder="#{signup.password}" type="password" name="password" th:field="*{password}" placeholder="Password"/>
+                            <div th:if="${param.error != null}" th:text="#{login.error}" class="alert alert-danger" role="alert">
+                                Bad username or password!
+                            </div>
+                            <button th:text="#{login.title.button}">Login</button>
+                        </div>
+                        </form>
+                        <form method="POST" th:action="@{/signup}" th:object="${userRegistration}">
+                            <div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger" role="alert">
+                                <ul>
+                                    <li th:each="err : ${#fields.errors()}" th:text="${err}"></li>
+                                </ul>
+                            </div>
+                        <div  th:class="${#fields.hasAnyErrors()}  ? 'reg show-page' : 'reg'" th:action="@{/signup}">
+                            <input th:field="*{username}" th:placeholder="#{signup.username}" class="signup-input" type="text" placeholder="Username"/>
+                            <input th:field="*{password}" th:placeholder="#{signup.password}" class="signup-input" type="password" placeholder="Password"/>
+                            <input th:field="*{confirmPassword}" th:placeholder="#{signup.password.confirm}" class="signup-input" type="password" placeholder="Password-Confirm"/>
+                            <button th:text="#{Register.title.button}">Register</button>
+                        </div>
+                    </form>
+                    </div>
+                </section>
+        </div>
+    </main>
+
+    <footer th:replace="fragments/layout :: footer"></footer>
+</div>
+<script type="text/javascript" th:src="@{/css/scripts/scripts.js}"></script>
+</body>
+</html>

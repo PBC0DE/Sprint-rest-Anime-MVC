@@ -1,0 +1,260 @@
+
+html {
+    scroll-behavior: smooth;
+    margin: 0 auto;
+}
+
+body {
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    margin: 0 auto;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #3e3d3d;
+}
+.nav {
+    margin-bottom: 20px;
+}
+footer {
+   padding-top: 30px;
+}
+
+
+.templateDesign {
+    position: relative;
+    z-index: 600;
+    display: flex;
+    padding-bottom: 17px;
+    justify-content: center;
+}
+.signup-form {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 60px 15px 50px 15px;
+    min-width: 370px;
+    border-radius: 20px;
+}
+.card-et {
+    border: solid 1px transparent;
+
+}
+.card-body {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    border: solid 1px transparent;
+}
+.page-item {
+    background-color: rgba(0, 0, 0, 0);
+}
+li.page-item.disabled {
+    background-color: rgba(0, 0, 0, 0.5);
+
+}
+.page-link {
+    background-color: rgba(0, 0, 0, 0.2);
+
+}
+.page-link:disabled {
+    background-color: rgba(0, 0, 0, 0.2);
+
+}
+.page-link {
+    background-color: rgba(0, 0, 0, 0.1);
+
+}
+.commentspot {
+}
+.commenttext {
+    min-width: 250px;
+    min-height: 200px;
+
+}
+.signup-input {
+    min-width: 300px;
+    display: flex;
+    outline: none;
+    padding: 15px 10px;
+    margin: 30px;
+    border: solid 1px transparent;
+    background: none;
+    color: white;
+    transition: border-color 1s;
+    flex-grow: 1;
+}
+.pageble {
+    margin-top: 17px;
+}
+.pagination > li > a
+{
+    color: #ffffff;
+}
+.pagination a:focus {
+    color: #1a1a1a;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #5a5a5a;
+}
+
+.pagination .disabled {
+    color:black;
+    background-color: transparent;
+}
+.pagination > .active > a
+{
+    color: black; !Important;
+    background-color: #656464 !Important;
+    border: solid 1px #fdfbff !Important;
+}
+
+.pagination > .active > a:hover
+{
+    background-color: #5A4181 !Important;
+    border: solid 1px #5A4181; !Important;
+}
+
+.signup-input:focus {
+    border-color: royalblue;
+}
+
+.signup-form button {
+    padding: 10px;
+    color: white;
+    background: royalblue;
+    border: none;
+    width: 200px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.signup-form button:hover {
+    background: rgb(114, 149, 255);
+}
+.animeimg {
+    margin-bottom: 1rem;
+    max-height: 405px;
+}
+.animeimg2 {
+    margin-bottom: 1rem;
+}
+
+.action {
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    margin: 30px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.load {
+    position: relative;
+    margin: 2px 5px;
+    padding-bottom: 5px;
+    border-bottom: solid 2px transparent;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.load.show {
+    border-bottom-color: royalblue;
+}
+
+.form a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin: 15px;
+    text-align: center;
+    transition: 0.5s;
+}
+.form a:hover {
+    color: royalblue;
+}
+.usernameshow {
+    margin-right: 20px;
+    margin-bottom:10px;
+}
+.newpost {
+
+    margin-left:14px;
+    margin-bottom:10px;
+}
+form ul a {
+    max-width: 30px !important;
+
+}
+.usernameshow {
+    margin-right:14px;
+    margin-bottom:10px;
+}
+.dropdown-menu {
+    min-width: 24px !important;
+    max-height: 40px!important;
+    padding: 2px;
+    background-color: transparent;
+    color: white;
+}
+.dropdown-menu li {
+    background-color: transparent;
+    color: white;
+}
+.dropdown-item {
+    color: white;
+}
+.login {
+    display: none;
+}
+.reg {
+    display: none;
+}
+
+.show-page {
+    display: block;
+    animation: show-page 1s;
+}
+
+@keyframes show-page {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.overlay {
+    position: absolute;
+    z-index: 50000;
+    max-height: 200px;
+    top: 350px;
+    bottom: 900px;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+main section h2 {
+    padding: 30px 30px 30px 0;
+}
+
+hr {
+    margin: 5px 40% 25px 40%;
+    width: 20%;
+    border: none;
+    border-bottom: 2px black solid;
+}
+
+.content-wrapper {
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+
+

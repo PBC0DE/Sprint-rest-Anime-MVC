@@ -1,0 +1,61 @@
+<!doctype html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/layout :: head"></head>
+
+<body class="d-flex h-100 text-center bg-dark">
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+    <header th:fragment="header" class="mb-auto">
+        <div>
+            <nav class="nav nav-masthead navbar-expand-md justify-content-between">
+                <h3 class="float-md-start mb-0 text-white">ANimeX</h3>
+                <div class="nav nav-masthead navbar-expand-md justify-content-center">
+                    <a sec:authorize="isAnonymous()" th:text="#{signup.page}" class="nav-link" aria-current="page" th:href="@{/signup}">SignUP</a>
+                    <a th:text="#{anime.page}" class="nav-link active" th:href="@{/}">Posts</a>
+                    <a th:text="#{about.page}" class="nav-link" href="#">About</a>
+                    <a sec:authorize="!isAnonymous()" th:text="#{logout}" class="nav-link" th:href="@{/logout}">Logout</a>
+                </div>
+                <form class="float-md-end mb-1 d-flex flex-row">
+                    <input th:placeholder="#{input.search}" class="form-control" type="text" placeholder="Search" aria-label="Search">
+                    <li class="p-2 dropdown" style="margin-left:15px">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
+                           aria-expanded="false"
+                           th:text="${#locale.toLanguageTag().toUpperCase()}">
+                        </a>
+                        <ul class="dropdown-menu justify-content-center" aria-labelledby="dropdown01">
+                            <li><a class="p-2 nav-link dropdown-item" th:href="@{''(lang='lt')}"
+                                   th:unless="${#locale.toString().equals('lt')}">LT</a></li>
+                            <li><a class="p-2 nav-link dropdown-item" th:href="@{''(lang='en')}"
+                                   th:unless="${#locale.toString().equals('en')}">EN</a></li>
+                        </ul>
+                    </li>
+                </form>
+            </nav>
+        </div>
+    </header>
+    <h3 th:text="#{latest.posts}" class="justify-content-center text-white ett">Latest Posts</h3>
+    <div sec:authorize="!isAnonymous()" class="d-flex flex-row justify-content-between">
+        <div class="p-2"><a th:href="@{'/createNewPost/'}"><button th:text="#{post.create.title}"  type="button" class="text-white btn btn-sm btn-outline-secondary newpost">New Post</button></a></div>
+        <nav sec:authorize="!isAnonymous()" class="nav nav-masthead navbar-expand-md justify-content-between">
+            <h3 class="float-md-start mb-0 text-white usernameshow"><a class="nav-link active"  th:text="${#authentication.principal.username}" href='#'>User</a></h3>
+        </nav>
+
+    </div>
+    <main>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <h4 class="text-white">INTERNAL SERVER ERROR AAAA</h4>
+            </div>
+        </div>
+    </main>
+
+    <footer th:replace="fragments/layout :: footer"></footer>
+</div>
+
+
+</body>
+</html>

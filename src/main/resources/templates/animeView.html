@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="/fragments/layout :: head"></head>
+<body class="d-flex h-100 text-center bg-dark">
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+    <header th:fragment="header" class="mb-auto">
+        <div>
+            <nav class="nav nav-masthead navbar-expand-md justify-content-between">
+                <h3 class="float-md-start mb-0 text-white"><a class="nav-link active" href='#'>AnimeX</a></h3>
+                <div class="nav nav-masthead navbar-expand-md justify-content-center">
+                    <a sec:authorize="isAnonymous()" th:text="#{signup.page}" class="nav-link" th:href="@{/signup}">SignUP</a>
+                    <a th:text="#{anime.page}" class="nav-link active" th:href="@{/}">Anime</a>
+                    <a th:text="#{about.page}" class="nav-link" href="#">About</a>
+                    <a sec:authorize="!isAnonymous()" th:text="#{logout}" class="nav-link" th:href="@{/logout}">Logout</a>
+                </div>
+                <form class="float-md-end mb-1 d-flex flex-row">
+                    <input th:placeholder="#{input.search}" class="form-control" type="text" placeholder="Search" aria-label="Search">
+                    <li class="p-2 dropdown" style="margin-left:15px">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
+                           aria-expanded="false"
+                           th:text="${#locale.toLanguageTag().toUpperCase()}">
+                        </a>
+                        <ul class="dropdown-menu justify-content-center" aria-labelledby="dropdown01">
+                            <li><a class="p-2 nav-link dropdown-item" th:href="@{''(lang='lt')}"
+                                   th:unless="${#locale.toString().equals('lt')}">LT</a></li>
+                            <li><a class="p-2 nav-link dropdown-item" th:href="@{''(lang='en')}"
+                                   th:unless="${#locale.toString().equals('en')}">EN</a></li>
+                        </ul>
+                    </li>
+                </form>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <nav sec:authorize="!isAnonymous()" class="nav nav-masthead navbar-expand-md justify-content-center">
+            <h3 class="float-md-start mb-0 text-white"><a th:text="${#authentication.principal.username}" class="nav-link active" href='#'>UserNAME</a></h3>
+        </nav>
+        <section class="templateDesign">
+            <div class="signup-form">
+                <div class="d-flex justify-content-around">
+                        <img class="animeimg2 img-fluid rounded" th:src="${anime.image}">
+                        <div class="d-flex align-items-start flex-column">
+                            <h2 th:text="${anime.name}" class="mt-0 signup-input text-white p-2">Your Post</h2>
+                            <hr>
+                            <h6 th:text="#{anime.type} + ': ' + ${anime.type}" class="mt-0 signup-input text-white p-2">Your Post</h6>
+                            <h6 th:text="#{anime.score} + ': ' + ${anime.score}" class="mt-0 signup-input text-white p-2">Your Post</h6>
+                            <h6 th:text="'Release Date: ' + ${anime.releasedate}" class="mt-0 signup-input text-white p-2">Your Post</h6>
+                            <h6 th:text="'Chapters: ' + ${anime.chapters}" class="mt-0 signup-input text-white p-2">Your Post</h6>
+                        </div>
+
+                </div>
+                <br>
+                <br>
+                    <hr>
+                <div class="login show-page">
+                    <p th:text="${anime.description}" class="signup-input signup-input-posttext" placeholder="Post Text"></p>
+                </div>
+            </div>
+            <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}" sec:authorize="!isAnonymous()"
+                 class="d-flex flex-column justify-content-start">
+                <div  class="p-2">
+                    <a th:href="@{'/anime/{id}/delete'(id=${anime.id})}">
+                        <button th:text="#{button.delete}" type="button" class="text-white btn btn-sm btn-outline-secondary newpost">Delete Post</button>
+                    </a>
+                </div>
+                <div th:if="${anime.id}" class="p-2">
+                    <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+                       th:href="@{'/anime/{id}/edit'(id=${anime.id})}">
+                        <button th:text="#{edit.post.tittle}" type="button" class="text-white btn btn-sm btn-outline-secondary newpost">Edit Post</button>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer th:replace="fragments/layout :: footer"></footer>
+</div>
+</body>
+</html>

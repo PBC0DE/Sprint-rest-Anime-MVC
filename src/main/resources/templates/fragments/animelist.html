@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:each="anime : ${anime}" th:fragment="anime(anime)">
+    <div class="col">
+        <div  class="card-et text-white">
+            <div class="card-body">
+                <p th:text="${anime.name}" class="card-text">Anime Name</p>
+                <a th:href="@{'/anime/{id}/view'(id=${anime.id})}">
+                    <img class="animeimg img-fluid rounded" th:src="${anime.image}">
+                </a>
+                <div class="d-flex justify-content-between align-items-center">
+                    <small th:text="#{anime.type} + ': ' + ${anime.type}" class="card-text">Type: Manga</small>
+                    <small th:text="#{anime.score} + ': ' + ${anime.score}" class="text-white">Score: 8.7</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
